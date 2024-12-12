@@ -16,8 +16,8 @@ public class CartService {
     private CartRepository cartRepository;
 
 
-    public Cart getItemToCart(String name, String description, String imageUrl, BigDecimal price) {
-        Cart cart = new Cart(name, description, price, imageUrl);
+    public Cart getItemToCart() {
+        Cart cart = new Cart();
         return cartRepository.save(cart);
     }
 
