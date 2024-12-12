@@ -5,26 +5,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 
 @Getter
 @Setter
 @Entity
-@Table (name = "baskets")
-public class Basket {
+@Table (name = "CARTS")
+public class Cart {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String name;
     private String description;
     private String imageUrl;
     private BigDecimal price = new BigDecimal(0);
 
-    public Basket(String name, String description, BigDecimal price, String imageUrl) {
+    public Cart(String name, String description, BigDecimal price, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
     }
-    public Basket() {}
+    public Cart() {}
 }

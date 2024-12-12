@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ItemService {
     private ItemRepository itemRepository;
 
-    public Item getItemDetailInfo(Long id) {
+    public Item getItem(String id) {
         Optional<Item> item = itemRepository.findById(id);
         return item.orElseThrow(() -> new EntityNotFoundException("Item not found"));
     }

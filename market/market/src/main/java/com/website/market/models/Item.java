@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 @Setter
 @Getter
 @Entity
-@Table(name = "items")
+@Table(name = "ITEMS")
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String name;
     private String description;
     private String imageUrl;
