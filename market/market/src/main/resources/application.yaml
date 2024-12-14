@@ -3,12 +3,16 @@ spring:
     name: market
   datasource:
     url: jdbc:h2:mem:market;DB_CLOSE_ON_EXIT=TRUE
+    driverClassName: org.h2.Driver
     username: root
     password: root
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
     show-sql: true
   h2:
     console:
         enabled: true
+  token:
+    signing:
+      key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
