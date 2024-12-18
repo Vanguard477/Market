@@ -4,12 +4,14 @@ package com.website.market.service;
 import com.website.market.dto.JwtAuthenticationResponse;
 import com.website.market.dto.SignInRequest;
 import com.website.market.dto.SignUpRequest;
-import com.website.market.models.User;
+import com.website.market.entities.models.User;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class AuthenticationService {
     /**
      * Регистрация пользователя
      */
-    public JwtAuthenticationResponse signUp(SignUpRequest request) {
+    public JwtAuthenticationResponse signUp(@Valid @RequestBody SignUpRequest request) {
 
         var user = User.builder()
                 .username(request.getUsername())
@@ -40,7 +42,7 @@ public class AuthenticationService {
     /**
      * Аутентификация пользователя
      */
-    public JwtAuthenticationResponse signIn(SignInRequest request) {
+    public JwtAuthenticationResponse signIn(@Valid @RequestBody SignInRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),
                 request.getPassword()

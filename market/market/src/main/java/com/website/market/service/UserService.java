@@ -1,17 +1,18 @@
 package com.website.market.service;
 
 
-import com.website.market.models.User;
+import com.website.market.entities.models.User;
 import com.website.market.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService{
     private final UserRepository repository;
 
     public User save(User user) {
@@ -45,10 +46,17 @@ public class UserService {
         return getByUsername(username);
     }
 
+    /*
     @Deprecated
     public void getAdmin() {
         var user = getCurrentUser();
         user.setRole(User.Role.ROLE_ADMIN);
         save(user);
+    }
+     */
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }

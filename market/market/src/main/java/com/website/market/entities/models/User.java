@@ -1,4 +1,4 @@
-package com.website.market.models;
+package com.website.market.entities.models;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,8 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Builder
 @Setter
@@ -23,10 +22,10 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Role role;
     @OneToOne
     private Cart cart;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,11 +51,12 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
+    
     public enum Role {
         ROLE_USER,
         ROLE_ADMIN
     }
+
 
 }
 

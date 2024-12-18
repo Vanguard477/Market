@@ -1,19 +1,18 @@
-package com.website.market.models;
+package com.website.market.entities.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Entity
-@Table(name = "CART_ITEM")
-public class CartItem {
+@Table(name = "CARTS")
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @ManyToOne
-    private Cart cart;
-    @ManyToOne
-    private Item item;
+    @OneToOne
+    private User user;
 }
