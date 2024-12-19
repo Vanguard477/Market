@@ -16,7 +16,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private User user;
     @OneToMany(fetch = FetchType.LAZY)
     private List<CartItem> cartItem;

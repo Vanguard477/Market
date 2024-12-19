@@ -22,7 +22,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Cart cart;
     @Enumerated(EnumType.STRING)
     private Role role;
