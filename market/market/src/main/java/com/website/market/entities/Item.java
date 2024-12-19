@@ -1,4 +1,4 @@
-package com.website.market.entities.models;
+package com.website.market.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

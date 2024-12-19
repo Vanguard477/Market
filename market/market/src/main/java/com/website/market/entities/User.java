@@ -1,4 +1,4 @@
-package com.website.market.entities.models;
+package com.website.market.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +22,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Cart cart;
     @Enumerated(EnumType.STRING)
     private Role role;

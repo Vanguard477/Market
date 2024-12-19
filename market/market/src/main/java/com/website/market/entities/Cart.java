@@ -1,8 +1,11 @@
-package com.website.market.entities.models;
+package com.website.market.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -13,6 +16,8 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private User user;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<CartItem> cartItem;
 }

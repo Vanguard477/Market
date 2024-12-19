@@ -1,7 +1,7 @@
 package com.website.market.service;
 
 
-import com.website.market.entities.models.Item;
+import com.website.market.entities.Item;
 import com.website.market.repository.ItemRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
