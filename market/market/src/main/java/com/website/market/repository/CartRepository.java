@@ -1,6 +1,6 @@
 package com.website.market.repository;
 
-import com.website.market.entities.models.Cart;
+import com.website.market.entities.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

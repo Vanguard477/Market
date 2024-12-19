@@ -1,4 +1,4 @@
-package com.website.market.entities.models;
+package com.website.market.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,8 +12,8 @@ public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cart cart;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
 }
