@@ -1,7 +1,7 @@
 package com.website.market.service;
 
 
-import com.website.market.entities.models.User;
+import com.website.market.entities.User;
 import com.website.market.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,15 +45,6 @@ public class UserService implements UserDetailsService{
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
     }
-
-    /*
-    @Deprecated
-    public void getAdmin() {
-        var user = getCurrentUser();
-        user.setRole(User.Role.ROLE_ADMIN);
-        save(user);
-    }
-     */
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

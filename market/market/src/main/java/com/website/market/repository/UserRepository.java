@@ -1,6 +1,6 @@
 package com.website.market.repository;
 
-import com.website.market.entities.models.User;
+import com.website.market.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.website.market.service;
 
 
-import com.website.market.entities.models.Cart;
+import com.website.market.entities.Cart;
 import com.website.market.repository.CartRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
