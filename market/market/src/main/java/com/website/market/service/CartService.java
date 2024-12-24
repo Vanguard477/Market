@@ -28,7 +28,7 @@ public class CartService {
 
     public Cart getCart(String id) {
         Optional<Cart> cart = cartRepository.findById(id);
-        return cart.orElseThrow(() -> new EntityNotFoundException("Items not found in basket"));
+        return cart.orElseThrow(() -> new EntityNotFoundException("Items not found in cart"));
     }
 
 }
