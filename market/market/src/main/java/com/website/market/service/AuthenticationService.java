@@ -4,6 +4,8 @@ package com.website.market.service;
 import com.website.market.dto.JwtAuthenticationResponse;
 import com.website.market.dto.SignInRequest;
 import com.website.market.dto.SignUpRequest;
+import com.website.market.entities.Cart;
+import com.website.market.entities.CartItem;
 import com.website.market.entities.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(User.Role.ROLE_USER)
+                .cart(new Cart())
                 .build();
 
         userService.create(user);

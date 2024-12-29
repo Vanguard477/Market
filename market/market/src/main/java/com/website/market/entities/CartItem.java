@@ -16,4 +16,5 @@ public class CartItem {
     private Cart cart;
     @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
+    private int quantity;
 }

@@ -19,4 +19,5 @@ public class Item {
     private String imageUrl;
     private BigDecimal price;
 
+
 }

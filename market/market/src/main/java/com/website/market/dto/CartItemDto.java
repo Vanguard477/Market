@@ -1,9 +1,12 @@
 package com.website.market.dto;
 
+import com.website.market.entities.CartItem;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
+@Accessors(chain = true)
 @Data
 public class CartItemDto {
     private String id;
@@ -12,5 +15,6 @@ public class CartItemDto {
     private String imageUrl;
     private BigDecimal price;
     private int quantity;
+
 
 }

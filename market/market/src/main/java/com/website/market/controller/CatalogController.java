@@ -2,6 +2,8 @@ package com.website.market.controller;
 
 
 import com.website.market.dto.CatalogItemDto;
+import com.website.market.dto.FilterDto;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +16,13 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class CatalogController {
-    private final List<CatalogItemDto> catalogItemDto;
+    private final CatalogItemDto catalogItemDto;
 
 
     @PostMapping
-    public List<CatalogItemDto> catalog(
-            @RequestParam(required = false, defaultValue = "1") int page
-            ,@RequestParam(required = false, defaultValue = "10") int size) {
+    public CatalogItemDto catalog(@RequestBody FilterDto filterDto) {
 
-        return catalogItemDto; //(PageRequest.of(page, size));
+        return catalogItemDto;
     }
 
     @PutMapping("/{itemId}/add-to-cart")
