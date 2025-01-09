@@ -9,4 +9,6 @@ import lombok.Setter;
 public class FilterDto {
     private int page;
     private int size;
+
+
 }

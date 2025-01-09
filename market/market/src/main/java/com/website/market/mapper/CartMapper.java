@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class CartMapper {
 
     public static CartDto toCartDto(Cart cart) {
-        var itemDto = cart.getCartItem()
+        var itemDto = cart.getCartItems()
                 .stream()
                 .map(CartMapper::toCartItemDto)
                 .toList();
