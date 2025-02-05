@@ -2,33 +2,30 @@ package com.website.market.service;
 
 
 import com.website.market.entities.Cart;
+import com.website.market.entities.CartItem;
+import com.website.market.entities.Item;
 import com.website.market.repository.CartRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
     private CartRepository cartRepository;
+    private UserService userService;
 
-
-    public Cart getItemToCart() {
-        Cart cart = new Cart();
-        return cartRepository.save(cart);
+    public Cart addItemTotCurrentUserCart(Item item) {
+        var currentUserCart = userService.getCurrentUser().getCart();
+        currentUserCart.getCartItems()
+                .add(getCartItem(item));
+        return cartRepository.save(currentUserCart);
     }
 
-    public Cart removeItemInCart(String id) {
-        Cart cart = cartRepository.findById(id).orElseThrow();
-        cartRepository.delete(cart);
-        return cart;
+    private CartItem getCartItem(Item item) {
+        CartItem cartItem = new CartItem();
+        cartItem.setItem(item);
+        return cartItem;
     }
 
-    public Cart getCart(String id) {
-        Optional<Cart> cart = cartRepository.findById(id);
-        return cart.orElseThrow(() -> new EntityNotFoundException("Items not found in basket"));
-    }
 
 }

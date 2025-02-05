@@ -4,14 +4,15 @@ package com.website.market.service;
 import com.website.market.dto.JwtAuthenticationResponse;
 import com.website.market.dto.SignInRequest;
 import com.website.market.dto.SignUpRequest;
+import com.website.market.entities.Cart;
 import com.website.market.entities.User;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +32,7 @@ public class AuthenticationService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(User.Role.ROLE_USER)
+                .cart(new Cart().setCartItems(new ArrayList<>()))
                 .build();
 
         userService.create(user);

@@ -17,6 +17,7 @@ public class Item {
     private String name;
     private String description;
     private String imageUrl;
-    private BigDecimal price = new BigDecimal(0);
+    private BigDecimal price;
+
 
 }
