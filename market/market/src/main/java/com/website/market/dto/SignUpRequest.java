@@ -10,7 +10,7 @@ import lombok.Data;
 @Schema(description = "Запрос на регистрацию")
 public class SignUpRequest {
     @Schema(description = "Имя пользователя", example = "Ara")
-    @Size(min = 5, max = 32, message = "Имя пользователя должно содержать от 5 до 32 символов")
+    @Size(min = 2, max = 32, message = "Имя пользователя должно содержать от 2 до 32 символов")
     @NotBlank(message = "Имя пользователя не может быть пустыми")
     private String username;
 
