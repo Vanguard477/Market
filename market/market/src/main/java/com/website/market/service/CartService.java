@@ -5,15 +5,17 @@ import com.website.market.entities.Cart;
 import com.website.market.entities.CartItem;
 import com.website.market.entities.Item;
 import com.website.market.repository.CartRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    private CartRepository cartRepository;
-    private UserService userService;
+    private final CartRepository cartRepository;
+    private final UserService userService;
 
+    @Transactional
     public Cart addItemTotCurrentUserCart(Item item) {
         var currentUserCart = userService.getCurrentUser().getCart();
         currentUserCart.getCartItems()

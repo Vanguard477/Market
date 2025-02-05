@@ -8,6 +8,6 @@ import java.util.List;
 @Accessors(chain = true)
 @Data
 public class CatalogResponseDto {
-    List<CatalogItemDto> items;
+    private List<CatalogItemDto> items;
 
 }

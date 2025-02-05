@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 public class CartMapper {
 
     public static CartDto toCartDto(Cart cart) {
-        var itemDto = cart.getCartItems()
+        var itemDtos = cart.getCartItems()
                 .stream()
                 .map(CartMapper::toCartItemDto)
                 .toList();
         return new CartDto()
-                .setItems(itemDto);
+                .setItems(itemDtos);
 
 
     }
