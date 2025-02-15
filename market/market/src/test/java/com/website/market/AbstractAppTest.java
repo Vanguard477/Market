@@ -1,22 +1,37 @@
 package com.website.market;
 
-import com.website.market.dto.FilterDto;
+import com.website.market.controller.AuthController;
+import com.website.market.controller.CartController;
+import com.website.market.controller.CatalogController;
 import com.website.market.repository.CartRepository;
 import com.website.market.repository.ItemRepository;
 import com.website.market.repository.UserRepository;
+import com.website.market.service.CurrentUserService;
+import com.website.market.service.ItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
 abstract class AbstractAppTest {
     @Autowired
-    private ItemRepository itemRepository;
+    protected ItemRepository itemRepository;
     @Autowired
-    private UserRepository userRepository;
+    protected UserRepository userRepository;
     @Autowired
-    private CartRepository cartRepository;
+    protected CartRepository cartRepository;
+    @Autowired
+    protected AuthController authController;
+    @Autowired
+    protected CartController cartController;
+    @Autowired
+    protected CatalogController catalogController;
+    @MockBean
+    protected CurrentUserService currentUserService;
+    @MockBean
+    protected ItemService itemService;
 
     @BeforeEach
     @DisplayName("Чистка базы")

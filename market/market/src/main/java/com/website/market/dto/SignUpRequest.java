@@ -5,8 +5,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 @Data
+@Accessors(chain = true)
 @Schema(description = "Запрос на регистрацию")
 public class SignUpRequest {
     @Schema(description = "Имя пользователя", example = "Ara")

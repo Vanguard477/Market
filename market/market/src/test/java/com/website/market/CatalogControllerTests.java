@@ -1,23 +1,13 @@
 package com.website.market;
 
-import com.website.market.controller.CartController;
-import com.website.market.controller.CatalogController;
 import com.website.market.dto.FilterDto;
 import com.website.market.entities.Cart;
 import com.website.market.entities.Item;
 import com.website.market.entities.User;
-import com.website.market.repository.CartRepository;
-import com.website.market.repository.ItemRepository;
-import com.website.market.repository.UserRepository;
-import com.website.market.service.CurrentUserService;
-import com.website.market.service.ItemService;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,23 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 @DisplayName("Получение каталога")
 public class CatalogControllerTests extends AbstractAppTest {
-    @Autowired
-    private CatalogController catalogController;
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private CartController cartController;
-    @MockBean
-    private CurrentUserService currentUserService;
-    @Autowired
-    private UserRepository userRepository;
-    @MockBean
-    private ItemService itemService;
-    @Autowired
-    private CartRepository cartRepository;
 
     @Test
-    void test() {
+    public void getTenItems() {
         itemRepository.saveAll(getItems());
     }
 
@@ -64,18 +40,19 @@ public class CatalogControllerTests extends AbstractAppTest {
     @Test
     @DisplayName("Список каталога с 1 айтемом")
     public void getCatalogWithItemInDb() {
-        FilterDto filterDto = new FilterDto();
-        filterDto.setPage(0);
-        filterDto.setSize(10);
+        FilterDto filterDto = new FilterDto(0, 10);
         Item item = new Item();
         item.setName("name");
         item.setDescription("desc");
         item.setImageUrl("url");
         item.setPrice(BigDecimal.valueOf(1));
         itemRepository.save(item);
+
         var result = catalogController.getCatalog(filterDto);
-        var resultItem = result.getItems().getFirst();
+
         assertEquals(1, result.getItems().size());
+        var resultItem = result.getItems().getFirst();
+
         assertNotNull(resultItem.getId());
         assertEquals("name", resultItem.getName());
         assertEquals("url", resultItem.getImageUrl());
@@ -85,19 +62,17 @@ public class CatalogControllerTests extends AbstractAppTest {
     @Test
     @DisplayName("Список каталога без айтемов в БД")
     public void getCatalogWithNoItemInDb() {
-        FilterDto filterDto = new FilterDto();
-        filterDto.setPage(0);
-        filterDto.setSize(10);
+        FilterDto filterDto = new FilterDto(0, 10);
+
         var result = catalogController.getCatalog(filterDto);
+
         assertEquals(0, result.getItems().size());
     }
 
     @Test
     @DisplayName("Список каталога с 2 айтемами в БД")
     public void getCatalogWithTwoItemsInDb() {
-        FilterDto filterDto = new FilterDto();
-        filterDto.setPage(0);
-        filterDto.setSize(10);
+        FilterDto filterDto = new FilterDto(0, 10);
         var items = List.of(
                 new Item()
                         .setName("name1")
@@ -111,8 +86,10 @@ public class CatalogControllerTests extends AbstractAppTest {
                         .setPrice(BigDecimal.valueOf(2))
         );
         itemRepository.saveAll(items);
+
         var result = catalogController.getCatalog(filterDto);
         var resultItem = result.getItems();
+
         assertEquals(2, result.getItems().size());
         assertNotNull(resultItem.getFirst().getId());
         assertEquals("name1", resultItem.getFirst().getName());
@@ -127,12 +104,12 @@ public class CatalogControllerTests extends AbstractAppTest {
     @Test
     @DisplayName("Список каталога с 10 айтемами в БД")
     public void getCatalogWithTenItemsInDb() {
-        FilterDto filterDto = new FilterDto();
-        filterDto.setPage(2);
-        filterDto.setSize(2);
-        test();
+        FilterDto filterDto = new FilterDto(2, 2);
+
+        getTenItems();
         var result = catalogController.getCatalog(filterDto);
         var resultItem = result.getItems();
+
         assertEquals(2, result.getItems().size());
         assertNotNull(resultItem.getFirst().getId());
         assertEquals("name5", resultItem.getFirst().getName());
@@ -159,9 +136,11 @@ public class CatalogControllerTests extends AbstractAppTest {
         item.setPrice(BigDecimal.valueOf(1));
         itemRepository.save(item);
         userRepository.save(user);
+
         Mockito.when(currentUserService.getCurrentUserName()).thenReturn(user.getUsername());
         catalogController.addItemFromCatalogToCart(item.getId());
         var result = cartRepository.findCartWithItemById(user.getCart().getId()).orElseThrow();
+
         assertNotNull(result);
         assertEquals(1, result.getCartItems().size());
     }
