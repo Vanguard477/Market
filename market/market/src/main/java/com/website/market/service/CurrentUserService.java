@@ -14,10 +14,9 @@ public class CurrentUserService {
 
     public String getCurrentUserName() {
         if (!securityEnabled) {
-            return "Username";
+            return "usernameTest";
         } else {
             return SecurityContextHolder.getContext().getAuthentication().getName();
         }
     }
-
 }

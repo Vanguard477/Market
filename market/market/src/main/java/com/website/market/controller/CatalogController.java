@@ -39,7 +39,7 @@ public class CatalogController {
 
     @PutMapping("/{itemId}/add-to-cart")
     public void addItemFromCatalogToCart(String id) {
-        cartService.addItemTotCurrentUserCart(itemService.getItemById(id));
+        cartService.addItemToCurrentUserCart(itemService.getItemById(id));
     }
 
 

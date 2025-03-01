@@ -31,8 +31,8 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(User.Role.ROLE_USER)
                 .cart(new Cart().setCartItems(new ArrayList<>()))
+                .role(User.Role.ROLE_USER)
                 .build();
 
         userService.create(user);

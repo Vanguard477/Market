@@ -16,7 +16,7 @@ public class CartService {
     private final UserService userService;
 
     @Transactional
-    public Cart addItemTotCurrentUserCart(Item item) {
+    public Cart addItemToCurrentUserCart(Item item) {
         var currentUserCart = userService.getCurrentUser().getCart();
         currentUserCart.getCartItems()
                 .add(getCartItem(item));
