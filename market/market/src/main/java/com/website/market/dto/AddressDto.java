@@ -1,6 +1,6 @@
 package com.website.market.dto;
 
-import lombok.*;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 

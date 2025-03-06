@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Data
 @Accessors(chain = true)
-public class OfferItemKafkaDto {
+public class ItemKafkaDto {
     private String id;
     private String name;
     private String description;

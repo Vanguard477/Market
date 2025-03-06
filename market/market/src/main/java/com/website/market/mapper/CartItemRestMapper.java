@@ -1,36 +1,34 @@
 package com.website.market.mapper;
 
-import com.website.market.dto.ItemKafkaDto;
-import com.website.market.dto.OrderKafkaDto;
+import com.website.market.dto.ItemRestDto;
+import com.website.market.dto.OrderRestDto;
 import com.website.market.entities.Cart;
 import com.website.market.entities.CartItem;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class CartItemKafkaMapper {
+public class CartItemRestMapper {
 
-    public static OrderKafkaDto toOrderKafkaDto(Cart cart, String address, String username) {
+    public static OrderRestDto toOrderRestDto(Cart cart, String address, String username) {
         var itemDtos = cart.getCartItems()
                 .stream()
-                .map(CartItemKafkaMapper::toUserCartItemDto)
+                .map(CartItemRestMapper::toUserCartItemDto)
                 .toList();
-        return new OrderKafkaDto()
+        return new OrderRestDto()
                 .setItems(itemDtos)
                 .setAddress(address)
                 .setUsername(username);
     }
 
-    private static ItemKafkaDto toUserCartItemDto(CartItem cartItem) {
+    private static ItemRestDto toUserCartItemDto(CartItem cartItem) {
         var item = cartItem.getItem();
-        return new ItemKafkaDto()
+        return new ItemRestDto()
                 .setId(item.getId())
                 .setName(item.getName())
                 .setPrice(item.getPrice())
                 .setDescription(item.getDescription())
                 .setQuantity(cartItem.getQuantity())
                 .setImageUrl(item.getImageUrl());
-
-
     }
 }

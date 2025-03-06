@@ -20,6 +20,8 @@ public interface UserRepository extends JpaRepository<User, String> {
     @EntityGraph(attributePaths = {"cart.cartItems"})
     Optional<User> findUserWithCartById(String id);
 
+    @EntityGraph(attributePaths = {"cart.cartItems"})
+    Optional<User> findUserWithCartByUsername(String username);
 
 
 }

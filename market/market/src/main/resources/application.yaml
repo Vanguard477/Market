@@ -18,7 +18,7 @@ spring:
       key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
   kafka:
     enabled: ${KAFKA_ENABLED:true}
-    bootstrap-servers: ${BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${BOOTSTRAP_SERVERS:localhost:29092}
     consumer:
       auto-offset-reset: earliest
       group-id: group-test
@@ -27,3 +27,4 @@ test:
 
 security:
   enabled: false
+

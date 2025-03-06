@@ -1,12 +1,8 @@
 package com.website.market.service;
 
 
-import com.website.market.dto.SignUpRequest;
-import com.website.market.entities.Item;
 import com.website.market.entities.User;
-import com.website.market.repository.ItemRepository;
 import com.website.market.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Slf4j
 @Service
