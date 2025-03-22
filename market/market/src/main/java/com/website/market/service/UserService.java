@@ -4,35 +4,37 @@ package com.website.market.service;
 import com.website.market.entities.User;
 import com.website.market.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
+import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
+@Accessors(chain = true)
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final CurrentUserService currentUserService;
 
-    public User save(User user) {
-        return repository.save(user);
-    }
 
     public User create(User user) {
-        if (repository.existsByUsername(user.getUsername())) {
+        log.info("create: " + user);
+        if (userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("Пользователь с таким именем уже существует");
         }
 
-        if (repository.existsByEmail(user.getEmail())) {
+        if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Пользователь с таким email уже существует");
         }
-
-        return save(user);
+        return userRepository.save(user);
     }
 
     public User getByUsername(String username) {
-        return repository.findByUsername(username)
+        log.info("getByUsername: " + username);
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
     }
@@ -42,13 +44,14 @@ public class UserService implements UserDetailsService {
     }
 
     public User getCurrentUser() {
-        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        var username = currentUserService.getCurrentUserName();
+        log.info("getCurrentUser: " + username);
         return getByUsername(username);
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
     }
+
 }

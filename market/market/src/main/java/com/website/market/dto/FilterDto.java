@@ -1,14 +1,13 @@
 package com.website.market.dto;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
+@AllArgsConstructor
 public class FilterDto {
     private int page;
     private int size;
-
 
 }
